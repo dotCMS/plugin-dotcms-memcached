@@ -13,8 +13,8 @@ Hopefully, the config is self documenting.
 One nice feature of this cache is that memcached servers can be added or removed while
 the server is running.  The code for doing so looks like this:
 
-
+```
 MemcachedCacheAdministratorImpl mem = (MemcachedCacheAdministratorImpl) CacheLocator.getCacheAdministrator().getImplementationObject();
 mem.addServer("127.0.0.1:11212", 5);
 mem.removeServer("127.0.0.1:11212");
-
+```
