@@ -5,12 +5,12 @@ This plugin will override the internal dotcms caching infrastructure (Guava) and
 ## Benefits
 
 The benefits of memcached are multiple:
-* the caching infrastructure becomes a networked server itself 
-* the caching server can be a cluster of servers and can be scaled and added to in order to add cache capacity.  
-* It  gets the Dotcms cache out of the java heap, which should speed up GC significantly.
-* Cache puts and invalidations are network wide - there is no external syncing mechanism.
-* Dotcms servers can be restarted with their caches fully loaded
-* Amazon offers a cloud based memcached implementation called [Amazon ElastiCache](http://aws.amazon.com/elasticache) that can scale your cache in the cloud
+* the caching infrastructure becomes a networked server (or cluster) itself 
+* the caching server can be scaled independently and at runtime in order to add/remove cache capacity.  
+* Removes Dotcms cache from the java heap, which should lower Dotcms memory requirement and speed up GC significantly.
+* Cache "puts" and "removes" are network-wide - there is no external syncing mechanism that can fail.
+* Dotcms servers can be restarted with their caches fully loaded, which can be a boon for large implementations.
+* Amazon offers a cloud based memcached infrastructure called [Amazon ElastiCache](http://aws.amazon.com/elasticache) that can scale your cache in the cloud
 
 ## About Memcached
 Memcached needs to be configured externally to dotcms and there is a lot to learn in running a memcached server.  For more information, see: http://memcached.org
