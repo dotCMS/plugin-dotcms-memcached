@@ -1,25 +1,29 @@
 # Dotcms & Memcached
 
-This plugin will override the internal dotcms caching infrastructure (Guava) and replace it with memcached, an external caching mechanism.  The benifits of memcached are multiple:
+This plugin will override the internal dotcms caching infrastructure (Guava) and replace it with memcached, an external caching mechanism.  
+
+## Benefits
+
+The benefits of memcached are multiple:
 * the caching infrastructure becomes a networked server itself 
 * the caching server can be a cluster of servers and can be scaled and added to in order to add cache capacity.  
 * It  gets the Dotcms cache out of the java heap, which should speed up GC significantly.
 * Cache puts and invalidations are network wide - there is no external syncing mechanism.
 * Dotcms servers can be restarted with their caches fully loaded
-* Amazon offers a cloud based memcache implementation called [Amazon ElastiCache](http://aws.amazon.com/elasticache) that can scale your cache in the cloud
+* Amazon offers a cloud based memcached implementation called [Amazon ElastiCache](http://aws.amazon.com/elasticache) that can scale your cache in the cloud
 
-# About Memcached
+## About Memcached
 Memcached needs to be configured externally to dotcms and there is a lot to learn in running a memcached server.  For more information, see: http://memcached.org
 
 
 
-# Configuring
+## Configuring
 You point to a memcached server/port by using the [dotmarketing-config.properties](https://github.com/dotCMS/plugin-dotcms-memcached/blob/master/conf/dotmarketing-config-ext.properties) 
 
 Hopefully, the [config](https://github.com/dotCMS/plugin-dotcms-memcached/blob/master/conf/dotmarketing-config-ext.properties) is self documenting.
 
 
-# Testing
+## Testing
 To test, fire up a memcached server locally, on port 11211 (should be the default):
 ```
 memcached -vv
@@ -32,7 +36,7 @@ memcached -d
 ```
 
 
-# Library
+## Library
 
 The library used in this implementation is called XMemcached.  You can read more about it
 here:
@@ -40,7 +44,7 @@ here:
 https://code.google.com/p/xmemcached/
 
 
-# Adding and removing servers from the memcached cluster
+## Adding and removing servers from the memcached cluster
 The code for adding or removing servers from the memcached cluster looks like this:
 
 ```
