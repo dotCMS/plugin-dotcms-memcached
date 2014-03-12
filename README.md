@@ -1,7 +1,7 @@
 This plugin will override the standard dotcms caching infrastructure and replaces it
 with Memcached.  Memcached needs to be configured externally to dotcms.
 
-You point to a memcached port by using the dotmarketing-config.properties
+You point to a memcached port by using the [dotmarketing-config.properties](https://github.com/dotCMS/plugin-dotcms-memcached/blob/master/conf/dotmarketing-config-ext.properties) 
 
 The library used in this implementation is called XMemcached.  You can read more about it
 here:
