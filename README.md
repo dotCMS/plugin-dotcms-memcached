@@ -1,20 +1,25 @@
-This plugin will override the internal dotcms caching infrastructure (Guava) and replace it
-with memcached.  The benifits of this are that with memcached, the caching infrastructure is networked and can be clustered and dynamically added to in order to add cache capacity.  It also gets the cache out of the java heap, which should speed up GC significantly.
+# Dotcms & Memcached
 
-see: http://memcached.org/
+This plugin will override the internal dotcms caching infrastructure (Guava) and replace it with memcached, an external caching mechanism.  The benifits of memcached are multiple:
+* the caching infrastructure becomes a networked server itself 
+* the caching server can be a cluster of servers and can be scaled and added to in order to add cache capacity.  
+* It  gets the Dotcms cache out of the java heap, which should speed up GC significantly.
+* Cache puts and invalidations are network wide - there is no external syncing mechanism.
+* Dotcms servers can be restarted with their caches fully loaded
+* Amazon offers a cloud based memcache implementation called [Amazon ElastiCache](http://aws.amazon.com/elasticache) that can scale your cache in the cloud
 
-Memcached needs to be configured externally to dotcms.
+# About Memcached
+Memcached needs to be configured externally to dotcms and there is a lot to learn in running a memcached server.  For more information, see: http://memcached.org
 
+
+
+# Configuring
 You point to a memcached server/port by using the [dotmarketing-config.properties](https://github.com/dotCMS/plugin-dotcms-memcached/blob/master/conf/dotmarketing-config-ext.properties) 
-
-The library used in this implementation is called XMemcached.  You can read more about it
-here:
-
-https://code.google.com/p/xmemcached/
 
 Hopefully, the [config](https://github.com/dotCMS/plugin-dotcms-memcached/blob/master/conf/dotmarketing-config-ext.properties) is self documenting.
 
 
+# Testing
 To test, fire up a memcached server locally, on port 11211 (should be the default):
 ```
 memcached -vv
@@ -26,8 +31,17 @@ memcached server.  To run memcached as a Deamon, you need to pass it the -d opti
 memcached -d
 ```
 
-One nice feature of this cache is that memcached servers can be added or removed while
-the dotcms servers are running.  The code for doing so looks like this:
+
+# Library
+
+The library used in this implementation is called XMemcached.  You can read more about it
+here:
+
+https://code.google.com/p/xmemcached/
+
+
+# Adding and removing servers from the memcached cluster
+The code for adding or removing servers from the memcached cluster looks like this:
 
 ```
 MemcachedCacheAdministratorImpl mem = (MemcachedCacheAdministratorImpl) CacheLocator.getCacheAdministrator().getImplementationObject();
