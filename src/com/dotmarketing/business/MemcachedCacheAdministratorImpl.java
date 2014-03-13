@@ -105,6 +105,9 @@ public class MemcachedCacheAdministratorImpl implements DotCacheAdministrator {
 
 			_servers.add(addr);
 		}
+		if(LicenseUtil.getLevel()<300){
+			_allServerIds = new String[0];
+		}
 
 		_oldCache = new DotGuavaCacheAdministratorImpl();
 
@@ -416,9 +419,7 @@ public class MemcachedCacheAdministratorImpl implements DotCacheAdministrator {
 			Logger.error(this.getClass(), "_putOldSchool failed: " + e.getMessage());
 		}
 		_oldCache.put(oldKey, content, group);
-		if(LicenseUtil.getLevel()<300){
-			_allServerIds = new String[0];
-		}
+
 		for (String x : _allServerIds) {
 			if (!x.equals(_serverId)) {
 				try {
