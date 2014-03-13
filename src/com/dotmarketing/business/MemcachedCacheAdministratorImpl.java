@@ -25,6 +25,7 @@ import net.rubyeye.xmemcached.utils.AddrUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jgroups.JChannel;
 
+import com.dotcms.enterprise.LicenseUtil;
 import com.dotmarketing.business.DotCacheAdministrator;
 import com.dotmarketing.business.RoleCache.UserRoleCacheHelper;
 import com.dotmarketing.util.Config;
@@ -415,7 +416,9 @@ public class MemcachedCacheAdministratorImpl implements DotCacheAdministrator {
 			Logger.error(this.getClass(), "_putOldSchool failed: " + e.getMessage());
 		}
 		_oldCache.put(oldKey, content, group);
-
+		if(LicenseUtil.getLevel()<300){
+			_allServerIds = new String[0];
+		}
 		for (String x : _allServerIds) {
 			if (!x.equals(_serverId)) {
 				try {
