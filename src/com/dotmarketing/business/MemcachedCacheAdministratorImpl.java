@@ -259,11 +259,15 @@ public class MemcachedCacheAdministratorImpl implements DotCacheAdministrator {
 
 	@Override
 	public void flushGroup(String group) {
+		if(group == null) return;
+		group=group.toLowerCase();
 		if (!canSerialize(group, group)) {
+			
 			_oldCache.flushGroup(group);
+			remove("indiciescacheinfo","indiciescache");
 			return;
 		}
-
+		remove("indiciescacheinfo","indiciescache");
 		Logger.debug(this.getClass(), "flushGroup Not Implemented, doing a flushAll instead" + group);
 	}
 
@@ -285,6 +289,7 @@ public class MemcachedCacheAdministratorImpl implements DotCacheAdministrator {
 	@Override
 	public void flushAlLocalOnlyl() {
 		_oldCache.flushAlLocalOnlyl();
+		remove("indiciescacheinfo","indiciescache");
 		Logger.debug(this.getClass(), "flushAlLocalOnlyl Not Implemented");
 	}
 
